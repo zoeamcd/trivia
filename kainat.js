@@ -8,7 +8,7 @@
 <p>Get ready to play...</p>
 
 <div>
-  <h3>Trivia!</h3>
+  <h1>Trivia!</h1>
   <p>Can you answer all questions correctly before the time runs out?</p>
 </div>
 
