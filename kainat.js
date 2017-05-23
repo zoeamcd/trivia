@@ -14,5 +14,13 @@
 
 <p>Let's go!</p>
 
+<button onclick="startGame()">Start!</button>
+
+<script>
+function startGame() {
+    var btn = document.createElement("BUTTON");
+    document.body.appendChild(btn);
+}
+
 </body>
 </html>
