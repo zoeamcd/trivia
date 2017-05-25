@@ -2,14 +2,12 @@
  * Created by h205p2 on 5/18/17.
  */
 var qA = [];
-var index = 0;
 var answers = [];
-var count = 0;
+var index = 0;
 var score = 0;
-$(document).ready(function() {
-    $("#next").hide();
-});
 function start(category) {
+    index = 0;
+    score = 0;
     $.ajax({
         url: "https://opentdb.com/api.php?amount=10&category=" + category + "&type=multiple",
         type: 'GET',
@@ -22,7 +20,6 @@ function start(category) {
             alert('Failed!');
         }
     });
-
     function handler(result) {
         for (i = 0; i < result.results.length; i++) {
             var x = [];
@@ -31,10 +28,13 @@ function start(category) {
             x.push(result.results[i].incorrect_answers);
             qA.push(x);
         }
-        console.log(qA);
     }
 }
 function next(){
+    if(index >= 10){
+        $.mobile.changePage("#end");
+        document.getElementById("finalScore").innerHTML = "Score: " + score;
+    }
     answers = [qA[index][1], qA[index][2][0], qA[index][2][1], qA[index][2][2]];
     shuffle(answers);
     document.getElementById("question").innerHTML = qA[index][0];
@@ -42,37 +42,30 @@ function next(){
     document.getElementById("1").innerHTML = answers[1];
     document.getElementById("2").innerHTML = answers[2];
     document.getElementById("3").innerHTML = answers[3];
+    $('.answer').prop('disabled', false);
+    $(".answer").css({"background-color":"transparent"});
+    $('#next').prop('disabled', true);
     index++;
 }
 function check(answer){
-    console.log(qA[index-1][1]);
-    console.log(answers[answer]);
     if(answers[answer] == qA[index-1][1]){
-        document.getElementById(answer).style.backgroundColor = "lightgreen";
-        score++;
+        document.getElementById(answer).style.backgroundColor = "limegreen";
+        score += 10;
     }
     else {
-        document.getElementById(answer).style.backgroundColor = "lightcoral";
+        document.getElementById(answer).style.backgroundColor = "red";
     }
-    $("#next").show();
-
+    $('.answer').prop('disabled', true);
+    $('#next').prop('disabled', false);
 }
-
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-
-        // And swap it with the current element.
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
+    var current = array.length, temporary, random;
+    while (0 !== current) {
+        random = Math.floor(Math.random() * current);
+        current -= 1;
+        temporary = array[current];
+        array[current] = array[random];
+        array[random] = temporary;
     }
-
     return array;
 }
