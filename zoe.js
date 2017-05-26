@@ -2,12 +2,11 @@ var qA = [];
 var answers = [];
 var index = 0;
 var score = 0;
-function start(category) {
+function start(difficulty) {
     index = 0;
     score = 0;
-    $('#start').removeClass("ui-disabled");
     $.ajax({
-        url: "https://opentdb.com/api.php?amount=10&category=" + category + "&type=multiple",
+        url: "https://opentdb.com/api.php?amount=10&category=" + document.getElementById("category").value + "&difficulty=" + difficulty + "&type=multiple",
         type: 'GET',
         crossDomain: true,
         dataType: 'json',
@@ -35,6 +34,7 @@ function next(){
     }
     answers = [qA[index][1], qA[index][2][0], qA[index][2][1], qA[index][2][2]];
     shuffle(answers);
+    document.getElementById("score").innerHTML = score;
     document.getElementById("question").innerHTML = qA[index][0];
     document.getElementById("0").innerHTML = answers[0];
     document.getElementById("1").innerHTML = answers[1];
@@ -42,7 +42,7 @@ function next(){
     document.getElementById("3").innerHTML = answers[3];
     $('.answer').prop('disabled', false);
     $(".answer").css({"background-color":"transparent"});
-    $('#next').prop('disabled', true);
+    $('#next').prop('disabled', false);
     index++;
 }
 function check(answer){
