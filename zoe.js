@@ -1,6 +1,3 @@
-/**
- * Created by h205p2 on 5/18/17.
- */
 var qA = [];
 var answers = [];
 var index = 0;
@@ -8,6 +5,7 @@ var score = 0;
 function start(category) {
     index = 0;
     score = 0;
+    $('#start').removeClass("ui-disabled");
     $.ajax({
         url: "https://opentdb.com/api.php?amount=10&category=" + category + "&type=multiple",
         type: 'GET',
@@ -33,7 +31,7 @@ function start(category) {
 function next(){
     if(index >= 10){
         $.mobile.changePage("#end");
-        document.getElementById("finalScore").innerHTML = "Score: " + score;
+        document.getElementById("final-score").innerHTML = "Score: " + score;
     }
     answers = [qA[index][1], qA[index][2][0], qA[index][2][1], qA[index][2][2]];
     shuffle(answers);
@@ -52,9 +50,15 @@ function check(answer){
         document.getElementById(answer).style.backgroundColor = "limegreen";
         score += 10;
     }
-    else {
+    else{
         document.getElementById(answer).style.backgroundColor = "red";
+        for(var i in answers){
+            if(answers[i] == qA[index-1][1]){
+                document.getElementById(i).style.backgroundColor = "limegreen";
+            }
+        }
     }
+    document.getElementById("score").innerHTML = score;
     $('.answer').prop('disabled', true);
     $('#next').prop('disabled', false);
 }
