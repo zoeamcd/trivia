@@ -17,37 +17,49 @@
 <body>
 <div data-role="page" id="menu">
     <div data-role="main" class="ui-content">
-        <h1 align="center">MENU</h1>
-        <p><a href="#categories" class="ui-btn">Categories</a></p>
+        <h1 align="center">TRIVIA</h1>
+        <div class="box">
+            <p>There are 10 questions per category</p>
+            <p>Each question is worth 10 points</p>
+            <p>Good luck!</p>
+        </div>
+        <p><a href="#categories" class="ui-btn ui-corner-all ui-shadow" data-transition="slide">Categories</a></p>
     </div>
 </div>
 <div data-role="page" id="categories">
     <div data-role="main" class="ui-content">
         <h1 align="center">CATEGORIES</h1>
-        <button class="ui-btn" onclick="start(14)">Television</button>
-        <button class="ui-btn" onclick="start(18)">Computers</button>
-        <button class="ui-btn" onclick="start(26)">Celebrities</button>
-        <button class="ui-btn" onclick="start(23)">History</button>
-        <button class="ui-btn" onclick="start(21)">Sports</button>
-        <a href="#questions" id="start" class="ui-btn ui-btn-inline ui-disabled" onclick="next()">Start</a>
+        <select id="category">
+            <option value="14">Television</option>
+            <option value="18">Computers</option>
+            <option value="26">Celebrities</option>
+            <option value="23">History</option>
+            <option value="21">Sports</option>
+        </select>
+        <div data-role="controlgroup" data-type="horizontal">
+            <button class="ui-btn ui-corner-all ui-shadow" onclick="start('easy')">Easy</button>
+            <button class="ui-btn ui-corner-all ui-shadow" onclick="start('medium')">Medium</button>
+            <button class="ui-btn ui-corner-all ui-shadow" onclick="start('hard')">Hard</button>
+        </div>
+        <a href="#questions" id="start" class="ui-btn ui-btn-inline ui-corner-all ui-shadow" data-transition="slide" onclick="next()">Start</a>
     </div>
 </div>
 <div data-role="page" id="questions">
     <div data-role="main" class="ui-content">
         <h1 id="score" align="center">0</h1>
         <div id="question"></div>
-        <button id="0" class="answer ui-btn" onclick="check(0)"></button>
-        <button id="1" class="answer ui-btn" onclick="check(1)"></button>
-        <button id="2" class="answer ui-btn" onclick="check(2)"></button>
-        <button id="3" class="answer ui-btn" onclick="check(3)"></button>
-        <button id="next" class="ui-btn ui-btn-inline" onclick="next()" disabled="true">Next</button>
+        <button id="0" class="answer ui-btn ui-corner-all ui-shadow" onclick="check(0)"></button>
+        <button id="1" class="answer ui-btn ui-corner-all ui-shadow" onclick="check(1)"></button>
+        <button id="2" class="answer ui-btn ui-corner-all ui-shadow" onclick="check(2)"></button>
+        <button id="3" class="answer ui-btn ui-corner-all ui-shadow" onclick="check(3)"></button>
+        <button id="next" class="ui-btn ui-btn-inline ui-corner-all ui-shadow" onclick="next()" disabled="true">Next</button>
     </div>
 </div>
 <div data-role="page" id="end">
     <div data-role="main" class="ui-content">
         <h1 align="center">GAME OVER</h1>
-        <h2 id="final-score" align="center"></h2>
-        <a href="#menu" class="ui-btn">Menu</a>
+        <h2 id="final-score" class="box" align="center"></h2>
+        <a href="#menu" class="ui-btn ui-corner-all ui-shadow" data-transition="slide">Menu</a>
     </div>
 </div>
 </body>
