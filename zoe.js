@@ -28,8 +28,34 @@ function start(category) {
         }
     }
 }
+<script type="text/javascript">
+
 function next(){
     if(index >= 10){
+
+        var seconds;
+        var temp;
+
+        function countdown() {
+            seconds = document.getElementById('countdown').innerHTML;
+            seconds = parseInt(seconds, 10);
+
+            if (seconds == 1) {
+                temp = document.getElementById('countdown');
+                temp.innerHTML = "out of time";
+                return;
+            }
+
+            seconds--;
+            temp = document.getElementById('countdown');
+            temp.innerHTML = seconds;
+            timeoutMyOswego = setTimeout(countdown, 1000);
+        }
+
+        countdown();
+    </script>
+
+
         $.mobile.changePage("#end");
         document.getElementById("final-score").innerHTML = "Score: " + score;
     }
@@ -46,6 +72,7 @@ function next(){
     index++;
 }
 function check(answer){
+
     if(answers[answer] == qA[index-1][1]){
         document.getElementById(answer).style.backgroundColor = "limegreen";
         score += 10;
