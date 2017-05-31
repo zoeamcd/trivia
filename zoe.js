@@ -3,6 +3,12 @@ var answers = [];
 var index = 0;
 var score = 0;
 function start(difficulty) {
+
+    var rightnow = new Date();
+    console.log(rightnow);
+    rightnow.setSeconds(rightnow.getSeconds() + 20);
+    console.log(rightnow)
+
     index = 0;
     score = 0;
     $.ajax({
@@ -27,37 +33,15 @@ function start(difficulty) {
         }
     }
 }
-<script type="text/javascript">
+
 
 function next(){
     if(index >= 10){
-
-        var seconds;
-        var temp;
-
-        function countdown() {
-            seconds = document.getElementById('countdown').innerHTML;
-            seconds = parseInt(seconds, 10);
-
-            if (seconds == 1) {
-                temp = document.getElementById('countdown');
-                temp.innerHTML = "out of time";
-                return;
-            }
-
-            seconds--;
-            temp = document.getElementById('countdown');
-            temp.innerHTML = seconds;
-            timeoutMyOswego = setTimeout(countdown, 1000);
-        }
-
         countdown();
-    </script>
-
-
         $.mobile.changePage("#end");
         document.getElementById("final-score").innerHTML = "Score: " + score;
     }
+
     answers = [qA[index][1], qA[index][2][0], qA[index][2][1], qA[index][2][2]];
     shuffle(answers);
     document.getElementById("score").innerHTML = score;
@@ -71,6 +55,7 @@ function next(){
     $('#next').prop('disabled', false);
     index++;
 }
+
 function check(answer){
 
     if(answers[answer] == qA[index-1][1]){
@@ -99,4 +84,35 @@ function shuffle(array) {
         array[random] = temporary;
     }
     return array;
+}
+
+function timer() {
+
+    var timePerQ = 60;
+
+    // Set the date we're counting down to
+    var countDownDate = new Date().getTime();
+    countDownDate += 20000;
+
+// Update the count down every 1 second
+    var x = setInterval(function() {
+
+        // Get todays date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now an the count down date
+        var distance = countDownDate - now;
+
+        // Time calculations for seconds
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Display the result in the element with id="demo"
+        document.getElementById("demo").innerHTML = seconds + "s ";
+
+        // If the count down is finished, write some text
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("demo").innerHTML = "You're out of time! Click next for the next question";
+        }
+    }, 1000);
 }

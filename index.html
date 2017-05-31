@@ -14,9 +14,12 @@
     <!--<script src="kainat.js"></script> -->
     <link rel="stylesheet" href="styles.css"/>
 </head>
-<body>
+<!--<body onload="timer()">-->
 <div data-role="page" id="menu">
     <div data-role="main" class="ui-content">
+        <!-- Albinson put this here -->
+        <!--<p id="demo"></p>-->
+
         <h1 align="center">TRIVIA</h1>
         <div class="box">
             <p>There are 10 questions per category</p>
@@ -48,6 +51,8 @@
     <div data-role="main" class="ui-content">
         <h1 id="score" align="center">0</h1>
         <div id="question"></div>
+        <p id="demo"></p>
+        <body onload="timer()">
         <button id="0" class="answer ui-btn ui-corner-all ui-shadow" onclick="check(0)"></button>
         <button id="1" class="answer ui-btn ui-corner-all ui-shadow" onclick="check(1)"></button>
         <button id="2" class="answer ui-btn ui-corner-all ui-shadow" onclick="check(2)"></button>
