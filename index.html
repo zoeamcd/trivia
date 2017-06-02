@@ -11,48 +11,42 @@
     <script src="isabella.js"></script>
     <script src="isobel.js"></script>
     <script src="kaya.js"></script>
-    <!--<script src="kainat.js"></script> -->
+    <script src="kainat.js"></script>
     <link rel="stylesheet" href="styles.css"/>
 </head>
-<!--<body onload="timer()">-->
+<body>
 <div data-role="page" id="menu">
     <div data-role="main" class="ui-content">
-        <!-- Albinson put this here -->
-        <!--<p id="demo"></p>-->
-
         <h1 align="center">TRIVIA</h1>
         <div class="box">
             <p>There are 10 questions per category</p>
             <p>Each question is worth 10 points</p>
             <p>Good luck!</p>
         </div>
-        <p><a href="#categories" class="ui-btn ui-corner-all ui-shadow" data-transition="slide">Categories</a></p>
-    </div>
-</div>
-<div data-role="page" id="categories">
-    <div data-role="main" class="ui-content">
-        <h1 align="center">CATEGORIES</h1>
         <select id="category">
-            <option value="14">Television</option>
-            <option value="18">Computers</option>
-            <option value="26">Celebrities</option>
-            <option value="23">History</option>
-            <option value="21">Sports</option>
+                <option value="14">Television</option>
+                <option value="18">Computers</option>
+                <option value="26">Celebrities</option>
+                <option value="23">History</option>
+                <option value="21">Sports</option>
+                <option value="22">Geography</option>
+                <option value="27">Animals</option>
+                <option value="19">Math</option>
+                <option value="15">Video Games</option>
         </select>
-        <div data-role="controlgroup" data-type="horizontal">
+        <div data-role="controlgroup" data-type="horizontal" >
             <button class="ui-btn ui-corner-all ui-shadow" onclick="start('easy')">Easy</button>
             <button class="ui-btn ui-corner-all ui-shadow" onclick="start('medium')">Medium</button>
             <button class="ui-btn ui-corner-all ui-shadow" onclick="start('hard')">Hard</button>
         </div>
-        <a href="#questions" id="start" class="ui-btn ui-btn-inline ui-corner-all ui-shadow" data-transition="slide" onclick="next()">Start</a>
+        <a href="#questions" id="start" data-inline="true" class="ui-btn ui-btn-inline ui-corner-all ui-shadow" data-transition="slide" onclick="next()">Start</a>
     </div>
 </div>
+
 <div data-role="page" id="questions">
     <div data-role="main" class="ui-content">
         <h1 id="score" align="center">0</h1>
-        <div id="question"></div>
-        <p id="demo"></p>
-        <body onload="timer()">
+        <div id="question" class="box"></div>
         <button id="0" class="answer ui-btn ui-corner-all ui-shadow" onclick="check(0)"></button>
         <button id="1" class="answer ui-btn ui-corner-all ui-shadow" onclick="check(1)"></button>
         <button id="2" class="answer ui-btn ui-corner-all ui-shadow" onclick="check(2)"></button>
