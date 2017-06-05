@@ -32,8 +32,12 @@ function start(difficulty) {
 function next(){
     document.getElementById("score").innerHTML = score;
     if(index >= 10){
+        if(score > localStorage.getItem("highscore")){
+            localStorage.setItem("highscore",score);
+        }
+        document.getElementById("finalscore").innerHTML = "Score: " + score;
+        document.getElementById("highscore").innerHTML = "High Score: " + localStorage.getItem("highscore");
         $.mobile.changePage("#end");
-        document.getElementById("final-score").innerHTML = "Score: " + score;
     }
     answers = [qA[index][1], qA[index][2][0], qA[index][2][1], qA[index][2][2]];
     shuffle(answers);
@@ -75,3 +79,4 @@ function shuffle(array) {
     }
     return array;
 }
+
