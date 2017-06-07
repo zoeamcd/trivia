@@ -2,11 +2,11 @@ var qA = [];
 var answers = [];
 var index = 0;
 var score = 0;
+var seconds = 10;
+var x;
 function start(difficulty) {
     index = 0;
     score = 0;
-    qA=[];
-    $('#start').removeClass("ui-disabled");
     $.ajax({
         url: "https://opentdb.com/api.php?amount=10&category=" + document.getElementById("category").value + "&difficulty=" + difficulty + "&type=multiple",
         type: 'GET',
@@ -30,7 +30,6 @@ function start(difficulty) {
     }
 }
 function next(){
-    document.getElementById("score").innerHTML = score;
     if(index >= 10){
         if(score > localStorage.getItem("highscore")){
             localStorage.setItem("highscore",score);
@@ -39,8 +38,12 @@ function next(){
         document.getElementById("highscore").innerHTML = "High Score: " + localStorage.getItem("highscore");
         $.mobile.changePage("#end");
     }
+
     answers = [qA[index][1], qA[index][2][0], qA[index][2][1], qA[index][2][2]];
     shuffle(answers);
+    timer();
+    document.getElementById("timer").innerHTML = 10;
+    document.getElementById("score").innerHTML = score;
     document.getElementById("question").innerHTML = qA[index][0];
     document.getElementById("0").innerHTML = answers[0];
     document.getElementById("1").innerHTML = answers[1];
@@ -48,13 +51,15 @@ function next(){
     document.getElementById("3").innerHTML = answers[3];
     $('.answer').prop('disabled', false);
     $(".answer").css({"background-color":"transparent"});
-    $('#next').prop('disabled', true);
+    $('#next').prop('disabled', false);
     index++;
 }
 function check(answer){
+    clearInterval(x);
     if(answers[answer] == qA[index-1][1]){
         document.getElementById(answer).style.backgroundColor = "limegreen";
         score += 10;
+        //clearTimeout()
     }
     else{
         document.getElementById(answer).style.backgroundColor = "red";
@@ -79,4 +84,24 @@ function shuffle(array) {
     }
     return array;
 }
-
+function timer() {
+    timePerQ = 10;
+    countDownDate = new Date().getTime();
+    countDownDate += 11000;
+    x = setInterval(function(){ timerCode() }, 1000);
+    $("#next").click(function() {
+        clearInterval(x);
+        x = setInterval(function(){ timerCode() }, 1000);
+    });
+}
+function timerCode() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+    seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    document.getElementById("timer").innerHTML = seconds;
+    if (seconds <= 0) {
+        clearInterval(x);
+        $('.answer').prop('disabled', true);
+        $('#next').prop('disabled', false);
+    }
+}
