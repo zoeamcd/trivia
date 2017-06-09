@@ -51,14 +51,22 @@
         <button id="1" class="answer ui-btn ui-corner-all ui-shadow" onclick="check(1)"></button>
         <button id="2" class="answer ui-btn ui-corner-all ui-shadow" onclick="check(2)"></button>
         <button id="3" class="answer ui-btn ui-corner-all ui-shadow" onclick="check(3)"></button>
-        <button id="next" class="ui-btn ui-btn-inline ui-corner-all ui-shadow" onclick="next()" disabled="true">Next</button>
+        <button id="next" class="ui-btn ui-btn-inline ui-corner-all ui-shadow" onclick="next()">Next</button>
     </div>
 </div>
 <div data-role="page" id="end">
     <div data-role="main" class="ui-content">
         <h1 align="center">GAME OVER</h1>
         <h2 id="finalscore" class="box" align="center"></h2>
-        <h2 id="highscore" class="box" align="center"></h2>
+        <div class="box">
+            <h2>High Scores:</h2>
+            <h3 id="score0"></h3>
+            <h3 id="score1"></h3>
+            <h3 id="score2"></h3>
+            <h3 id="score3"></h3>
+            <h3 id="score4"></h3>
+
+        </div>
         <a href="#menu" class="ui-btn ui-corner-all ui-shadow" data-transition="slide">Menu</a>
     </div>
 </div>
