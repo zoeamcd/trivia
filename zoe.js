@@ -4,6 +4,8 @@ var index = 0;
 var score = 0;
 var seconds = 10;
 var x;
+var scores = localStorage.getItem("scores").split(",");
+console.log(scores);
 function start(difficulty) {
     index = 0;
     score = 0;
@@ -31,11 +33,19 @@ function start(difficulty) {
 }
 function next(){
     if(index >= 10){
-        if(score > localStorage.getItem("highscore")){
-            localStorage.setItem("highscore",score);
+        for(var i=0; i<5; i++){
+            if(score >= scores[i]){
+                scores.splice(i,0,score);
+                break;
+            }
         }
+        scores = scores.slice(0,5);
+        console.log(scores);
+        localStorage.setItem("scores",scores);
         document.getElementById("finalscore").innerHTML = "Score: " + score;
-        document.getElementById("highscore").innerHTML = "High Score: " + localStorage.getItem("highscore");
+        for(var j=0; j<scores.length; j++){
+            document.getElementById("score"+j).innerHTML = (j+1)+". " + scores[j];
+        }
         $.mobile.changePage("#end");
     }
 
@@ -51,7 +61,7 @@ function next(){
     document.getElementById("3").innerHTML = answers[3];
     $('.answer').prop('disabled', false);
     $(".answer").css({"background-color":"transparent"});
-    $('#next').prop('disabled', false);
+    $('#next').prop('disabled', true);
     index++;
 }
 function check(answer){
@@ -59,7 +69,6 @@ function check(answer){
     if(answers[answer] == qA[index-1][1]){
         document.getElementById(answer).style.backgroundColor = "limegreen";
         score += 10;
-        //clearTimeout()
     }
     else{
         document.getElementById(answer).style.backgroundColor = "red";
